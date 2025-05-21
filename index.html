@@ -18,16 +18,44 @@
       font-size: 60px;
       text-align: center;
     }
-    iframe {
-      margin-top: 40px;
-      width: 560px;
-      height: 315px;
-      border: none;
+    #timer {
+      font-size: 40px;
+      margin-top: 30px;
+    }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
     }
   </style>
 </head>
 <body>
+
   <h1>The Social Intervention</h1>
-  <iframe src="https://www.youtube.com/embed/3dJ4wFqQzz4" allowfullscreen></iframe>
+  <div id="timer">05:00</div>
+  <button onclick="startTimer()">Start Timer</button>
+
+  <script>
+    let countdown;
+
+    function startTimer() {
+      clearInterval(countdown);
+      let time = 300; // 5 minutes in seconds
+
+      countdown = setInterval(() => {
+        let minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+        document.getElementById("timer").textContent =
+          (minutes < 10 ? "0" : "") + minutes + ":" +
+          (seconds < 10 ? "0" : "") + seconds;
+
+        if (time <= 0) {
+          clearInterval(countdown);
+          alert("Time's up!");
+        }
+        time--;
+      }, 1000);
+    }
+  </script>
+
 </body>
 </html>
